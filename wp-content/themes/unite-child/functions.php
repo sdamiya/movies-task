@@ -8,6 +8,11 @@
         wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     }
 
+    
+    /**
+	 * A function to add the custom post type to the main query.
+    */
+
     function add_movies_cpt_query($query) {
         if (is_home() && $query->is_main_query())
             $query->set('post_type', array('post', 'page', 'movies'));
