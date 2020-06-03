@@ -208,6 +208,36 @@ class Movies {
 
         register_taxonomy( 'actors', 'movie', $movie_args );
     }
+
+    // Creating shortcode with multiple attributes
+    function last_movies_by_number(){
+ 
+        $args = array('post_type' => 'movie');
+
+        $query = new WP_query($args);
+
+        if ($query->have_posts())  {
+            echo "da";
+            while ($query->have_posts()) :
+                $query->the_post();
+            endwhile;
+        }
+           
+
+       
+        // $output = '<a href="'.$args['url'].'" style="color:'.$args['color'].'; font-size:'.$args['textsize'].' ">Check Out My Facebook Page</a>';
+
+        wp_reset_postdata();
+
+        $output .= '<a'. get_the_title().'</a>';
+
+        return $output;
+    }
+
+    function wporg_shortcodes_init()
+{
+    add_shortcode('wporg', 'wporg_shortcode');
+}
 }
 
 if (class_exists('Movies')) {
@@ -227,3 +257,6 @@ add_action('init', array( $movies_cpt, 'create_countries_taxonomies'));
 add_action('init', array( $movies_cpt, 'create_actors_taxonomies'));
 
 register_activation_hook(__FILE__, 'rewrite_movies_flush');
+
+// Add a shortcode for last movies by number
+add_shortcode( 'movies-number' , array( $movies_cpt, 'last_movies_by_number'));

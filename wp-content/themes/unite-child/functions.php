@@ -49,7 +49,7 @@
     */
 
     function custom_posts_per_page( $query ) {
-        if ( $query->is_archive('movie') ) {
+        if ( $query->is_archive('movie') && ! is_admin() ) {
             set_query_var('posts_per_page', 4);
         }
     }
