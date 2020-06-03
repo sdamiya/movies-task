@@ -1,4 +1,3 @@
-  
 <?php
 /**
  * @package Movies Plugin
@@ -7,7 +6,7 @@
 /*
 Plugin Name: Movies
 Plugin URI: 
-Description: A simple plugin for Movies custom post type
+Description: A simple plugin for Movies custom post type and Genres/Countries/Years/Actors taxonomies
 Author: Stefan Damiyanov
 Version: 1.0.0
 Author URI: 
@@ -17,12 +16,12 @@ Author URI:
 defined ('ABSPATH') or die('You cannot access this file anymore!');
 
 class Movies {
+
     public function __construct(){}
-
-
+    
     /**
 	 * A function for creation and register a Movie custom post type.
-	 */
+	*/
 
     function create_movie_cpt() {
 
@@ -79,6 +78,10 @@ class Movies {
         register_post_type( 'movie', $args );
     }
 
+    /**
+	 * Remove rewrite rules and then recreate rewrite rules.
+	*/
+    
     function rewrite_movies_flush() {
         create_movie_cpt();
         flush_rewrite_rules();
@@ -86,7 +89,7 @@ class Movies {
 
     /**
 	 * A function for creation of Genre taxonomy and its registration.
-	 */
+	*/
 
     function create_genres_taxonomies() {
 
@@ -124,28 +127,28 @@ class Movies {
         register_taxonomy( 'genres', 'movie', $movie_args );
     }
 
-      /**
+    /**
 	 * A function for creation of Country taxonomy and its registration.
-	 */
+	*/
 
     function create_countries_taxonomies() {
 
         $labels = array(
-            'name' => _x( 'Countries', 'taxonomy general name' ),
-            'singular_name' => _x( 'Country', 'taxonomy singular name' ),
-            'search_items' => __( 'Search Countries' ),
-            'all_items' => __( 'All Countries' ),
-            'parent_item' => __( 'Parent Country' ),
-            'parent_item_colon' => __( 'Parent Country:' ),
-            'edit_item' => __( 'Edit Country' ),
-            'update_item' => __( 'Update Country' ),
-            'add_new_item' => __( 'Add New Country' ),
-            'new_item_name' => __( 'New Country Name' ),
-            'separate_items_with_commas' => __( 'Separate Country with commas' ),
-            'add_or_remove_items' => __( 'Add or remove Country' ),
-            'choose_from_most_used' => __( 'Choose from the most used Country' ),
-            'not_found' => __( 'No Country found.' ),
-            'menu_name' => __( 'Country' ),
+            'name' => __('Countries'),
+            'singular_name' => __('Country'),
+            'search_items' => __('Search Countries'),
+            'all_items' => __('All Countries'),
+            'parent_item' => __('Parent Country'),
+            'parent_item_colon' => __('Parent Country:'),
+            'edit_item' => __('Edit Country'),
+            'update_item' => __('Update Country'),
+            'add_new_item' => __('Add New Country'),
+            'new_item_name' => __('New Country Name'),
+            'separate_items_with_commas' => __('Separate Country with commas'),
+            'add_or_remove_items' => __('Add or remove Country'),
+            'choose_from_most_used' => __('Choose from the most used Country'),
+            'not_found' => __('No Country found.'),
+            'menu_name' => __('Countries'),
         );
 
         $args = array(
@@ -159,10 +162,51 @@ class Movies {
             'has_archive' => true,
         );
 
-        $countries = array( 'rewrite' => array( 'slug' => 'country' ) );
-        $movie_args = array_merge( $args, $countries  );
+        $countries = array('rewrite' => array('slug' => 'country'));
+        $movie_args = array_merge($args, $countries);
 
-        register_taxonomy( 'countries', 'movie', $movie_args );
+        register_taxonomy('countries', 'movie', $movie_args);
+    }
+
+    /**
+	 * A function for creation of Actors taxonomy and its registration.
+	*/
+
+    function create_actors_taxonomies() {
+
+        $labels = array(
+            'name' => _x( 'Actor', 'taxonomy general name' ),
+            'singular_name' => _x( 'Actor', 'taxonomy singular name' ),
+            'search_items' => __( 'Search Actors' ),
+            'all_items' => __( 'All Actors' ),
+            'parent_item' => __( 'Parent Actor' ),
+            'parent_item_colon' => __( 'Parent Actor:' ),
+            'edit_item' => __( 'Edit Actor' ),
+            'update_item' => __( 'Update Actor' ),
+            'add_new_item' => __( 'Add New Actor' ),
+            'new_item_name' => __( 'New Actor Name' ),
+            'separate_items_with_commas' => __( 'Separate Actors with commas' ),
+            'add_or_remove_items' => __( 'Add or remove Actors' ),
+            'choose_from_most_used' => __( 'Choose from the most used Actor' ),
+            'not_found' => __( 'No Actor found.' ),
+            'menu_name' => __( 'Actors' ),
+        );
+
+        $args = array(
+            'hierarchical' => false,
+            'labels' => $labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'update_count_callback' => '_update_post_term_count',
+            'public' => true,
+            'publicly_queryable' => true,
+            'has_archive' => true,
+        );
+
+        $actors = array( 'rewrite' => array( 'slug' => 'actors' ) );
+        $movie_args = array_merge( $args, $actors  );
+
+        register_taxonomy( 'actors', 'movie', $movie_args );
     }
 }
 
@@ -178,5 +222,8 @@ add_action('init', array( $movies_cpt, 'create_genres_taxonomies'));
 
 // Add and register Contries taxonomy
 add_action('init', array( $movies_cpt, 'create_countries_taxonomies'));
+
+// Add and register Actors taxonomy
+add_action('init', array( $movies_cpt, 'create_actors_taxonomies'));
 
 register_activation_hook(__FILE__, 'rewrite_movies_flush');
