@@ -17,21 +17,61 @@ get_header(); ?>
 			<header class="page-header">
 				<?php
 					the_archive_title( '<h1 class="page-title">', '</h1>' );
-					// the_archive_description( '<div class="taxonomy-description">', '</div>' );
 				?>
 			</header><!-- .page-header -->
 
 			<?php /* Start the Loop */ ?>
 			<?php while ( have_posts() ) : the_post(); ?>
 
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to override this in a child theme, then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
-				?>
+			  	<div class="custom-post-movies">
+					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+					
+						<?php the_title('<h1 class="entry-title">','</h1>' ); ?>
+					
+						<div>
+							<small>Genres:</small>
+						
+							<?php var_dump($wp_the_query->post_count); ?>  
+							<small>
+								<?php echo get_custom_taxonomies( $post->ID, 'genres' ); ?>  
+							</small>
+						</div>
 
+						<div>
+							<small>Actors:</small>
+							<small>
+								<?php echo get_custom_taxonomies( $post->ID, 'actors' ); ?>  
+							</small>
+						</div>
+
+						<div>
+							<small>Countries:</small>
+							<small>
+								<?php echo get_custom_taxonomies( $post->ID, 'countries' ); ?>  
+							</small>
+						</div>
+
+						<div>
+							<small>Budget:</small>
+							<small>
+							<?php the_field('budget'); ?>
+							</small>
+						</div>
+
+						<div>
+							<small>Released year:</small>
+							<small>
+								<?php the_field('release_date'); ?>
+							</small>
+						</div>
+					
+						<?php the_content(); ?>
+
+						<hr class="section-divider">
+						
+					</article>
+				</div>
+			
 			<?php endwhile; ?>
 
 			<?php unite_paging_nav(); ?>

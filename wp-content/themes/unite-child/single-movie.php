@@ -16,14 +16,9 @@ get_header(); ?>
 				
 					<?php the_title('<h1 class="entry-title">','</h1>' ); ?>
 					
-					<?php if( has_post_thumbnail() ): ?>
-						
-						<div class="pull-right"><?php the_post_thumbnail('thumbnail'); ?></div>
-				
-					<?php endif; ?>
- 
 					<div>
 						<small>Genres:</small>
+					
 						<small>
 							<?php echo get_custom_taxonomies( $post->ID, 'genres' ); ?>  
 						</small>
@@ -59,7 +54,7 @@ get_header(); ?>
 				
 					<?php the_content(); ?>
 
-					<hr>
+					<hr class="section-divider">
 					
 					<div class="row">
 						<div class="col-xs-6 text-left"><?php previous_post_link(); ?></div>
