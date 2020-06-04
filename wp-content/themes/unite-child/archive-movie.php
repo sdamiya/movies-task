@@ -26,12 +26,11 @@ get_header(); ?>
 			  	<div class="custom-post-movies">
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					
-						<?php the_title('<h1 class="entry-title">','</h1>' ); ?>
+						<h2 class="entry-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 					
 						<div>
 							<small>Genres:</small>
 						
-							<?php var_dump($wp_the_query->post_count); ?>  
 							<small>
 								<?php echo get_custom_taxonomies( $post->ID, 'genres' ); ?>  
 							</small>

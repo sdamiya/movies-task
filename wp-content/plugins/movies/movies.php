@@ -208,22 +208,59 @@ class Movies {
 
         register_taxonomy( 'actors', 'movie', $movie_args );
     }
+
+    // Creating shortcode with multiple attributes
+    function last_movies_by_number($atts){
+
+        $args = shortcode_atts( array(
+            'post_type' => 'movie',
+            'count' => '5',
+        ), $atts );
+
+        $query_args = array(  
+            'post_type' => 'movie',
+            'post_status' => 'publish',
+            'posts_per_page' => $args['count'], 
+            'orderby' => 'post_date', 
+            'order' => 'DESC', 
+         );
+        
+        $query = new WP_Query($query_args); 
+
+
+        while ( $query->have_posts() ) : $query->the_post(); 
+            
+            echo the_title() . ' '; 
+        
+        endwhile;
+
+        wp_reset_postdata();
+
+      
+
+        return $post->ID;
+    }
 }
 
 if (class_exists('Movies')) {
+
     $movies_cpt = new Movies();
+
+    // Add and register the movies custom post type
+    add_action('init', array( $movies_cpt, 'create_movie_cpt'));
+
+    // Add and register Genre taxonomy
+    add_action('init', array( $movies_cpt, 'create_genres_taxonomies'));
+
+    // Add and register Contries taxonomy
+    add_action('init', array( $movies_cpt, 'create_countries_taxonomies'));
+
+    // Add and register Actors taxonomy
+    add_action('init', array( $movies_cpt, 'create_actors_taxonomies'));
+
+    register_activation_hook(__FILE__, 'rewrite_movies_flush');
+
+    // Add a shortcode for last movies by number
+    add_shortcode( 'movies-number' , array( $movies_cpt, 'last_movies_by_number'));
+    
 }
-
-// Add and register the movies custom post type
-add_action('init', array( $movies_cpt, 'create_movie_cpt'));
-
-// Add and register Genre taxonomy
-add_action('init', array( $movies_cpt, 'create_genres_taxonomies'));
-
-// Add and register Contries taxonomy
-add_action('init', array( $movies_cpt, 'create_countries_taxonomies'));
-
-// Add and register Actors taxonomy
-add_action('init', array( $movies_cpt, 'create_actors_taxonomies'));
-
-register_activation_hook(__FILE__, 'rewrite_movies_flush');
