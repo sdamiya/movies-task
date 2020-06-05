@@ -8,65 +8,24 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area col-sm-12 col-md-8 <?php echo esc_attr(unite_get_option( 'site_layout' )); ?>">
-		<!-- <main id="main" class="site-main" role="main"> -->
-		
+		<main id="main" class="site-main" role="main">
+
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				
-					<?php the_title('<h1 class="entry-title">','</h1>' ); ?>
-					
-					<div>
-						<small>Genres:</small>
-					
-						<small>
-							<?php echo get_custom_taxonomies( $post->ID, 'genres' ); ?>  
-						</small>
-					</div>
+			<?php get_template_part( 'movies-article', 'single' ); ?>
 
-					<div>
-						<small>Actors:</small>
-						<small>
-							<?php echo get_custom_taxonomies( $post->ID, 'actors' ); ?>  
-						</small>
-					</div>
+			<?php unite_post_nav(); ?>
 
-					<div>
-						<small>Countries:</small>
-						<small>
-							<?php echo get_custom_taxonomies( $post->ID, 'countries' ); ?>  
-						</small>
-					</div>
-
-					<div>
-						<small>Budget:</small>
-						<small>
-						<?php the_field('budget'); ?>
-						</small>
-					</div>
-
-					<div>
-						<small>Released year:</small>
-						<small>
-							<?php the_field('release_date'); ?>
-						</small>
-					</div>
-				
-					<?php the_content(); ?>
-
-					<hr class="section-divider">
-					
-					<div class="row">
-						<div class="col-xs-6 text-left"><?php previous_post_link(); ?></div>
-						<div class="col-xs-6 text-right"><?php next_post_link(); ?></div>
-					</div>
-					
-				
-				</article>
+			<?php
+				// If comments are open or we have at least one comment, load up the comment template
+				if ( comments_open() || '0' != get_comments_number() ) :
+					comments_template();
+				endif;
+			?>
 
 		<?php endwhile; // end of the loop. ?>
 
-		<!-- </main>#main -->
+		</main><!-- #main -->
 	</div><!-- #primary -->
 
 <?php get_sidebar(); ?>
