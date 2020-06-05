@@ -229,16 +229,49 @@ class Movies {
 
 
         while ( $query->have_posts() ) : $query->the_post(); 
+            // $output .= '<div href="' . get_term_link( $term ) . '">'. $term->name .'</div>';
             
-            echo the_title() . ' '; 
+        
+           $output .= 
+           '<div>
+                <article id="post-' . $query->post->ID . '">
+                    <h2 class="entry-title"><a href="' . $query->post->guid . '" rel="bookmark"> '. $query->post->post_title .'</a></h2>
+
+                    <div>
+                        <small>Genres:</small>
+                        <small>'. get_custom_taxonomies( $query->post->ID, 'genres' ) .'</small>
+                    </div>
+
+                     <div>
+                        <small>Actors:</small>
+                        <small>'. get_custom_taxonomies( $query->post->ID, 'actors' ) .'</small>
+                    </div>
+
+                    <div>
+                        <small>Country:</small>
+                        <small>'. get_custom_taxonomies( $query->post->ID, 'countries' ) .'</small>
+                    </div>
+                    
+                    <div>
+                        <small>Budget:</small>
+                        <small>' . get_field('budget') . '</small>
+                    </div>
+
+                     <div>
+                        <small>Released year:</small>
+                        <small>' . get_field('release_date') . '</small>
+                    </div>
+
+                    <div>' . $query->post->post_content . '</div> 
+                  </article>
+           </div>';
+            
         
         endwhile;
 
         wp_reset_postdata();
 
-      
-
-        return $post->ID;
+        return $output;
     }
 }
 
