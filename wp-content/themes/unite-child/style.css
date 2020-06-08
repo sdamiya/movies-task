@@ -14,4 +14,74 @@ Text Domain: unite-child
 
 ul#menu-navbar > li > a {
   color: #fff;
+  font-size: 20px;
+}
+
+#menu-navbar {
+  flex-direction: row;
+}
+
+.row-container {
+  padding: 4%;
+}
+
+.container-article {
+  width: 900px;
+}
+
+div.post-block {
+  width: 400px;
+  float: left;
+  clear: none;
+  padding: 2%;
+}
+
+.row-pagination {
+  width: 100%;
+}
+
+.aligned-row {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.row-pagination {
+  padding: 4%;
+}
+
+.page-numbers {
+  margin: 1%;
+  padding: 5px;
+  border: 2px solid #54397e;
+  border-radius: 3px;
+  font: 14px;
+  color: #54397e;
+}
+
+.row.display-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row.display-flex > [class*="col-"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.custom-icon {
+  font-size: 14px;
+}
+
+.movie-title {
+  font-size: 18px;
+}
+
+.movie-image {
+  min-height: 400px;
+  height: 400px;
+}
+
+nav.post-navigation {
+  width: 100%;
 }

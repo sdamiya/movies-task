@@ -12,7 +12,13 @@ get_header(); ?>
 
 		<?php while ( have_posts() ) : the_post(); ?>
 
-			<?php get_template_part( 'movies-article', 'single' ); ?>
+			<div class="container-articles">
+				<div class="row display-flex ">
+					<div class="">
+						<?php get_template_part( 'movies-article', 'single' ); ?>
+					</div>
+				</div>
+			</div>
 
 			<?php unite_post_nav(); ?>
 
@@ -28,5 +34,4 @@ get_header(); ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

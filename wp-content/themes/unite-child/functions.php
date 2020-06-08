@@ -1,18 +1,15 @@
 <?php
 
     // // An action which will make the child to get the parent styles on enqueue script
-    // add_action( 'wp_enqueue_scripts', 'enqueue_parent_styles' );
+    add_action( 'wp_enqueue_scripts', 'enqueue_parent_styles' );
 
-    // // A function to enqueue parent styles
-    // function enqueue_parent_styles() {
-    //     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    // }
-
-    function enqueue_unite_stylesheet() {
+    // A function to enqueue parent styles
+    function enqueue_parent_styles() {
         wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/inc/css/bootstrap.min.css' );
-        wp_enqueue_style( 'parent_style', get_template_directory_uri() . '/style.css' );
+        wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
     }
-    add_action( 'wp_enqueue_scripts', 'enqueue_unite_stylesheet' );
+
+  
 
     
     /**
@@ -51,13 +48,11 @@
     }
 
     /**
-	 * A function to have only 4 posts per page.
+	 * A filter to split the content into two parts.
     */
 
-    function custom_posts_per_page( $query ) {
-        if ( $query->is_archive('movie') && ! is_admin() ) {
-            set_query_var('posts_per_page', 4);
-        }
+    function split_content($article) {
+        return $article;
     }
 
-    add_action( 'pre_get_posts', 'custom_posts_per_page' );
+    add_filter('split-hook', 'split_content');
