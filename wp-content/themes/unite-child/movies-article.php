@@ -33,24 +33,24 @@
 
             <?php if ( $post->post_type === 'movie' ) : ?>
                 
-                <div class="row">
+                <div class="row mt-2">
                     <i class="fa fa-money ml-2 custom-icon" aria-hidden="true"></i>
                     <div class="ml-2"><b>Budget:</b></div>
-                    <div class="ml-2">
+                    <span class="ml-4  label label-primary">
                         <?php the_field('budget'); ?>
-                    </div>
+                    </span>
                 </div>
 
             <?php endif; ?>
 
             <?php if ( $post->post_type === 'movie' ) : ?>
 
-                <div class="row">
+                <div class="row mt-2">
                     <i class="fa fa-calendar ml-2 custom-icon" aria-hidden="true"></i>
                     <div class="ml-2"><b>Released year:</b></div>
-                    <div class="ml-2">
+                    <span class="ml-4 label label-primary">
                         <?php the_field('release_date'); ?>
-                    </div>
+                    </span>
                 </div>
                 
             <?php endif; ?>

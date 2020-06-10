@@ -254,16 +254,16 @@ class Movies {
                                         <div class="ml-2">'. get_custom_taxonomies_icon( $query->post->ID, 'countries', 'country_icon' ) .'</div>
                                     </div>
                                     
-                                    <div class="row">
+                                    <div class="row mt-2">
                                          <i class="fa fa-money ml-2 custom-icon" aria-hidden="true"></i>
                                         <div class="ml-2"><b>Budget:</b></div>
-                                        <div class="ml-2">' . get_field('budget') . '</div>
+                                        <span class="ml-4 label label-primary">' . get_field('budget') . '</span>
                                     </div>
 
-                                    <div class="row">
+                                    <div class="row mt-2">
                                         <i class="fa fa-calendar ml-2 custom-icon" aria-hidden="true"></i>
                                         <div class="ml-2"><b>Released year:</b></div>
-                                        <div class="ml-2">' . get_field('release_date') . '</div>
+                                        <span class="ml-4 label label-primary">' . get_field('release_date') . '</span>
                                     </div>
 
                                 </article>

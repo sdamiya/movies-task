@@ -90,3 +90,12 @@ div.post-block {
 nav.post-navigation {
   width: 100%;
 }
+
+.label {
+  color: white !important;
+}
+
+.label-primary {
+  font-size: 11px;
+  color: #337ab7;
+}
