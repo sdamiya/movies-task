@@ -63,6 +63,7 @@ get_header(); ?>
 							'next_text'    => __('NEXT »'),
 					)) . '</div>';
 			}
+			
 			wp_reset_postdata();
 			?>
 

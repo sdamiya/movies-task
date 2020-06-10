@@ -22,7 +22,7 @@ ul#menu-navbar > li > a {
 }
 
 .row-container {
-  padding: 4%;
+  margin: 2%;
 }
 
 .container-article {
@@ -75,6 +75,11 @@ div.post-block {
 
 .movie-title {
   font-size: 18px;
+}
+
+.movie-title a {
+  color: #54397e;
+  text-decoration: none !important;
 }
 
 .movie-image {

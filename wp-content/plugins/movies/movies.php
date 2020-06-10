@@ -231,39 +231,46 @@ class Movies {
         while ( $query->have_posts() ) : $query->the_post(); 
             
             $output .= 
-                '<div class="container">
+                '<div class="container mt-4">
     				<div class="row">
                             <div class="col-md-6">
                                 <article id="post-' . $query->post->ID . '">
-                                    <h2 class="entry-title"><a href="' . $query->post->guid . '" rel="bookmark"> '. $query->post->post_title .'</a></h2>
-
-                                    <div>
-                                        <small>Genres:</small>
-                                        <small>'. get_custom_taxonomies( $query->post->ID, 'genres' ) .'</small>
-                                    </div>
-
-                                    <div>
-                                        <small>Actors:</small>
-                                        <small>'. get_custom_taxonomies( $query->post->ID, 'actors' ) .'</small>
-                                    </div>
-
-                                    <div>
-                                        <small>Country:</small>
-                                        <small>'. get_custom_taxonomies( $query->post->ID, 'countries' ) .'</small>
-                                    </div>
-                                    
-                                    <div>
-                                        <small>Budget:</small>
-                                        <small>' . get_field('budget') . '</small>
-                                    </div>
-
-                                    <div>
-                                        <small>Released year:</small>
-                                        <small>' . get_field('release_date') . '</small>
-                                    </div>
+                                    <div class="movie-title"><a href="' . $query->post->guid . '" rel="bookmark"> '. $query->post->post_title .'</a></div>
 
                                     <div>' . $query->post->post_content . '</div> 
+
+                                    <div class="row">
+                                        <div class="ml-2"><b>Genres:</b></div>
+                                        <div class="ml-2">'. get_custom_taxonomies_icon( $query->post->ID, 'genres', 'genres_icon' ) .'</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="ml-2"><b>Actors:</b></div>
+                                        <div class="ml-2">'. get_custom_taxonomies( $query->post->ID, 'actors' ) .'</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="ml-2"><b>Countries:</b></div>
+                                        <div class="ml-2">'. get_custom_taxonomies_icon( $query->post->ID, 'countries', 'country_icon' ) .'</div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                         <i class="fa fa-money ml-2 custom-icon" aria-hidden="true"></i>
+                                        <div class="ml-2"><b>Budget:</b></div>
+                                        <div class="ml-2">' . get_field('budget') . '</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <i class="fa fa-calendar ml-2 custom-icon" aria-hidden="true"></i>
+                                        <div class="ml-2"><b>Released year:</b></div>
+                                        <div class="ml-2">' . get_field('release_date') . '</div>
+                                    </div>
+
                                 </article>
+
+                                <div>
+                                    <hr class="section-divider">
+                                </div>
                             </div>
                     	</div>
 				</div>';

@@ -1,17 +1,19 @@
-
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-        <div class="movie-title"><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></div>
+        <div class="movie-title">
+            <a href="<?php the_permalink(); ?>" rel="bookmark">
+                <?php the_title(); ?>
+            </a>
+        </div>
 
-            <?php the_content(); ?>
+        <?php the_content(); ?>
 
         <div class="row-container">
 
             <div class="row">
                 <div class="ml-2"><b>Genres:</b></div>
-            
                 <div class="ml-2">
-                    <?php echo get_custom_taxonomies( $post->ID, 'genres' ); ?>  
+                    <?php echo get_custom_taxonomies_icon( $post->ID, 'genres', 'genres_icon' ); ?>  
                 </div>
             </div>
 
@@ -25,7 +27,7 @@
             <div class="row">
                 <div class="ml-2"><b>Countries:</b></div>
                 <div class="ml-2">
-                    <?php echo get_custom_taxonomies( $post->ID, 'countries' ); ?>  
+                    <?php echo get_custom_taxonomies_icon( $post->ID, 'countries', 'country_icon' ); ?>  
                 </div>
             </div>
 
